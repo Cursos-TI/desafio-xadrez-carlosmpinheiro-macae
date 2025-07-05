@@ -4,58 +4,67 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
 // O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
 
+#include <stdio.h>
+
+// Função recursiva para a Torre (5 Direita)
+void moverTorre(int passos) {
+    if (passos == 0) return;
+    printf("Direita\n");
+    moverTorre(passos - 1);
+}
+
+// Função recursiva para a Rainha (8 Esquerda)
+void moverRainha(int passos) {
+    if (passos == 0) return;
+    printf("Esquerda\n");
+    moverRainha(passos - 1);
+}
+
+// Função recursiva + loop aninhado para o Bispo (5 Cima Direita)
+void moverBispo(int passos) {
+    if (passos == 0) return;
+
+    for (int vertical = 0; vertical < 1; vertical++) {
+        for (int horizontal = 0; horizontal < 1; horizontal++) {
+            printf("Cima Direita\n");
+        }
+    }
+
+    moverBispo(passos - 1);
+}
+
+// Cavalo: loops com múltiplas variáveis e condições
+void moverCavalo() {
+    printf("\nMovimento do Cavalo:\n");
+
+    int cima = 0, direita = 0;
+
+    for (; cima <= 2 && direita <= 1; cima++) {
+        if (cima < 2) {
+            printf("Cima\n");
+        } else {
+            while (direita < 1) {
+                printf("Direita\n");
+                direita++;
+            }
+        }
+    }
+}
 
 
 int main() {
-    // Constantes de movimento
-    const int movimentoTorre = 5;
-    const int movimentoBispo = 5;
-    const int movimentoRainha = 8;
-
-    int i;
-
-    //Movimento da TORRE – 5 casas para a direita (usando FOR)
     printf("Movimento da Torre:\n");
-    for (i = 1; i <= movimentoTorre; i++) {
-        printf("Direita\n");
-    }
+    moverTorre(5);
 
-    //Movimento do BISPO – 5 casas na diagonal (Cima + Direita) (usando WHILE)
     printf("\nMovimento do Bispo:\n");
-    i = 1;
-    while (i <= movimentoBispo) {
-        printf("Cima Direita\n");
-        i++;
-    }
+    moverBispo(5);
 
-    //Movimento da RAINHA – 8 casas para a esquerda (usando DO-WHILE)
     printf("\nMovimento da Rainha:\n");
-    i = 1;
-    do {
-        printf("Esquerda\n");
-        i++;
-    } while (i <= movimentoRainha);
+    moverRainha(8);
 
-
-    // Movimento do CAVALO – 2 para baixo, 1 para esquerda (usando FOR + WHILE)
-    printf("\nMovimento do Cavalo:\n");
-
-    int passosVerticais = 2;   // Duas casas para baixo
-    int passosLaterais = 1;    // Uma casa para a esquerda
-    int j = 0;
-
-    // Loop externo: movimento vertical (FOR)
-    for (i = 0; i < passosVerticais; i++) {
-        printf("Baixo\n");
-    }
-
-    // Loop interno: movimento lateral (WHILE)
-    while (j < passosLaterais) {
-        printf("Esquerda\n");
-        j++;
-    }
-
+    moverCavalo();
 
     return 0;
 }
+
 
